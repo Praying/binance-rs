@@ -26,9 +26,12 @@ pub enum FuturesMarket {
 impl FuturesWebsocketAPI {
     fn params(self, market: FuturesMarket, subscription: &str) -> String {
         let baseurl = match market {
-            FuturesMarket::USDM => "wss://fstream.binance.com",
-            FuturesMarket::COINM => "wss://dstream.binance.com",
-            FuturesMarket::Vanilla => "wss://vstream.binance.com",
+            // FuturesMarket::USDM => "wss://fstream.binance.com",
+             FuturesMarket::USDM => "wss://fstream.binance.info",
+            // FuturesMarket::COINM => "wss://dstream.binance.com",
+             FuturesMarket::COINM => "wss://dstream.binance.info",
+            // FuturesMarket::Vanilla => "wss://vstream.binance.com",
+             FuturesMarket::Vanilla => "wss://vstream.binance.info",
         };
 
         match self {

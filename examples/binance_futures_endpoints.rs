@@ -1,4 +1,5 @@
 use binance::api::*;
+use binance::config::Config;
 use binance::futures::general::*;
 use binance::futures::market::*;
 use binance::futures::model::*;
@@ -11,7 +12,9 @@ fn main() {
 }
 
 fn general() {
-    let general: FuturesGeneral = Binance::new(None, None);
+    //let general: FuturesGeneral = Binance::new(None, None);
+    let config = Config::default_cn();
+    let general: FuturesGeneral = Binance::new_with_config(None, None, &config);
 
     match general.ping() {
         Ok(answer) => println!("{:?}", answer),
@@ -44,7 +47,9 @@ fn general() {
 }
 
 fn market_data() {
-    let market: FuturesMarket = Binance::new(None, None);
+    let config = Config::default_cn();
+    let market: FuturesMarket = Binance::new_with_config(None, None, &config);
+    //let market: FuturesMarket = Binance::new(None, None);
 
     match market.get_depth("btcusdt") {
         Ok(answer) => println!("Depth update ID: {:?}", answer.last_update_id),

@@ -22,6 +22,18 @@ impl Config {
         }
     }
 
+    pub fn default_cn()->Config{
+        Config {
+            rest_api_endpoint: "https://www.binance.info".into(),
+            ws_endpoint: "wss://nbstream.binance.info".into(),
+
+            futures_rest_api_endpoint: "https://www.binance.info".into(),
+            //下面这个还有点问题
+            futures_ws_endpoint: "wss://nbstream.binance.info".into(),
+
+            recv_window: 5000,
+        }
+    }
     pub fn testnet() -> Config {
         Config::default()
             .set_rest_api_endpoint("https://testnet.binance.vision")

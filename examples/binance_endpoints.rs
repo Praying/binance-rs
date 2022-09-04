@@ -10,8 +10,8 @@ use binance::errors::ErrorKind as BinanceLibErrorKind;
 fn main() {
     // The general spot API endpoints; shown with
     // testnet=false and testnet=true
-    general(false);
-    general(true);
+    //general(false);
+    //general(true);
 
     // The market data API endpoint
     market_data();
@@ -20,6 +20,7 @@ fn main() {
     // and uncomment the line below (and do not commit your api key :)).
     //account();
     //savings();
+    println!("Hello,Waiting");
 }
 
 fn general(use_testnet: bool) {
@@ -27,7 +28,9 @@ fn general(use_testnet: bool) {
         let config = Config::default().set_rest_api_endpoint("https://testnet.binance.vision");
         Binance::new_with_config(None, None, &config)
     } else {
-        Binance::new(None, None)
+        let config = Config::default_cn();
+        Binance::new_with_config(None, None, &config)
+        //Binance::new(None, None)
     };
 
     let ping = general.ping();
@@ -158,7 +161,9 @@ fn savings() {
 
 #[allow(dead_code)]
 fn market_data() {
-    let market: Market = Binance::new(None, None);
+    let config = Config::default_cn();
+    let market:Market = Binance::new_with_config(None, None, &config);
+    //let market: Market = Binance::new(None, None);
 
     // Order book at default depth
     match market.get_depth("BNBETH") {
